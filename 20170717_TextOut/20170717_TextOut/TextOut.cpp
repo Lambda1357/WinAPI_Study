@@ -40,6 +40,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
 	HDC hdc;
 	PAINTSTRUCT lpPaint;
+	RECT rect = { 100,100,400,300 };
+	//TODO:DrawText를 위한 변수선언 필요함.
 	switch (iMessage)
 	{
 	case WM_DESTROY:
