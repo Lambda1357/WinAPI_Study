@@ -39,16 +39,18 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmd
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
 	HDC hdc;
-
+	PAINTSTRUCT lpPaint;
 	switch (iMessage)
 	{
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		return 0;
-	case WM_LBUTTONDOWN:
-		hdc = GetDC(hWnd);
-		TextOut(hdc, 100, 100, TEXT("Beautiful Korea"), 15);
-		ReleaseDC(hWnd, hdc);
+	case WM_PAINT:
+		hdc = BeginPaint(hWnd, &lpPaint);
+		SetTextAlign(hdc, TA_CENTER);
+		TextOut(hdc, 200, 100, TEXT("테스트 출력입니다"), lstrlen(TEXT("테스트 출력입니다")));
+		TextOut(hdc, 200, 120, TEXT("개행 테스트 출력입니다"), lstrlen(TEXT("개행 테스트 출력입니다")));
+		EndPaint(hWnd, &lpPaint);
 		return 0;
 	}
 	return(DefWindowProc(hWnd, iMessage, wParam, lParam));
